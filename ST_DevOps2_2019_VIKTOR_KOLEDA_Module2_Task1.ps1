@@ -14,3 +14,5 @@ Get-Command *-Item
 Get-Command *-File*
 #6.Получить список команд работы с объектами
 Get-Command *-Object
+#7.Получите список всех псевдонимов
+Get-Alias
