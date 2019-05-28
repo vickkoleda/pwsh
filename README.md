@@ -1,0 +1,2 @@
+# pwsh
+ST_DevOps2_2019_VIKTOR_KOLEDA_Module2
