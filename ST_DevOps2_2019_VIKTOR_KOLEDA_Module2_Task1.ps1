@@ -9,3 +9,6 @@ Get-Help Get-Help -Examples
 Get-Help about_Windows_Powershell_5.0
 #4.Получите все командлеты установки значений
 Get-Command Set-*
+#5.Получить список команд работы с файлами
+Get-Command *-Item
+Get-Command *-File*
