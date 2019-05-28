@@ -16,3 +16,10 @@ Get-Command *-File*
 Get-Command *-Object
 #7.Получите список всех псевдонимов
 Get-Alias
+#8.Создайте свой псевдоним для любого командлета
+Set-Alias fwrule Get-NetFirewallRule
+#9.Просмотреть список методов и свойств объекта типа процесс
+Get-Process explorer | Get-Member -MemberType Properties, Methods
+#10.Просмотреть список методов и свойств объекта типа строка
+$string = "Hello World"
+$string | Get-Member -MemberType Properties, Methods
