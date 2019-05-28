@@ -12,3 +12,5 @@ Get-Command Set-*
 #5.Получить список команд работы с файлами
 Get-Command *-Item
 Get-Command *-File*
+#6.Получить список команд работы с объектами
+Get-Command *-Object
