@@ -41,3 +41,8 @@ Get-UICulture
 Get-Date
 #16.Сгенерируйте случайное число (любым способом)
 Get-Random
+#17.Выведите дату и время, когда был запущен процесс «explorer». Получите какой это день недели. 
+#Дата и время когда был запущен процесс «explorer»
+(Get-Process explorer).StartTime
+#День недели, когда был запущен процесс «explorer»
+((Get-Process explorer).StartTime).DayOfWeek
