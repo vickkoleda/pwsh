@@ -52,3 +52,12 @@ $Word = New-Object -ComObject Word.Application
 $Word.Documents.Open("D:\psversion.txt")
 $Word.Documents.Close()
 $Word.Quit()
+#19.Подсчитать значение выражения S
+$i = 0
+$sum = 0
+$N=Get-Random -Minimum 2 -Maximum 100
+do {$i++
+$sum = 3*$i + $sum
+Write-Host "At step $i the sum S is $sum" 
+}
+until ($i -eq $N)
