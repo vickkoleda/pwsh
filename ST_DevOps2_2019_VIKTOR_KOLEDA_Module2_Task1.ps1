@@ -61,3 +61,21 @@ $sum = 3*$i + $sum
 Write-Host "At step $i the sum S is $sum" 
 }
 until ($i -eq $N)
+#20.Напишите функцию для предыдущего задания. Запустите её на выполнение.
+function sum {
+    param (
+            [Parameter(Mandatory=$true,
+            ValueFromPipeline=$true)]
+            [ValidateRange(1,2147483647)]
+            [int]$N
+    )
+    $i = 0
+$sum = 0
+do {$i++
+$sum = 3*$i + $sum
+Write-Host "At step $i the sum S is $sum" 
+}
+until ($i -eq $N)
+}
+
+sum 
