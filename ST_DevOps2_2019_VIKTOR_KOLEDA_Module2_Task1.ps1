@@ -46,3 +46,9 @@ Get-Random
 (Get-Process explorer).StartTime
 #День недели, когда был запущен процесс «explorer»
 ((Get-Process explorer).StartTime).DayOfWeek
+#18.Откройте любой документ в MS Word (не важно как) и закройте его с помощью PowerShell
+$PSVersionTable.PSVersion > d:\psversion.txt
+$Word = New-Object -ComObject Word.Application
+$Word.Documents.Open("D:\psversion.txt")
+$Word.Documents.Close()
+$Word.Quit()
