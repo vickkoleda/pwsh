@@ -37,3 +37,5 @@ Get-Service EventLog | Format-List *
 Get-HotFix
 #14.Узнайте, какой язык установлен для UI Windows
 Get-UICulture
+#15.Получите текущее время и дату
+Get-Date
