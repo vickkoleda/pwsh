@@ -23,3 +23,13 @@ Get-Process explorer | Get-Member -MemberType Properties, Methods
 #10.Просмотреть список методов и свойств объекта типа строка
 $string = "Hello World"
 $string | Get-Member -MemberType Properties, Methods
+#11.Получить список запущенных процессов, данные об определённом процессе
+#Список запущеных процессов
+Get-Process
+#Данные об определённом процессе
+Get-Process chrome | Format-Table *
+#12.Получить список всех сервисов, данные об определённом сервисе
+#Список запущеных процессов
+Get-Service
+#Данные об определённом сервисе
+Get-Service EventLog | Format-List *
