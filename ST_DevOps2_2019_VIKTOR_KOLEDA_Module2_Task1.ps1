@@ -35,3 +35,5 @@ Get-Service
 Get-Service EventLog | Format-List *
 #13.Получить список обновлений системы
 Get-HotFix
+#14.Узнайте, какой язык установлен для UI Windows
+Get-UICulture
