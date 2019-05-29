@@ -33,3 +33,5 @@ Get-Process chrome | Format-Table *
 Get-Service
 #Данные об определённом сервисе
 Get-Service EventLog | Format-List *
+#13.Получить список обновлений системы
+Get-HotFix
