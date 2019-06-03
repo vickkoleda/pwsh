@@ -22,3 +22,5 @@ Get-ChildItem Task2:\
 Get-Content Task2:\RunningServices.txt
 #5.Просуммировать все числовые значения переменных текущего сеанса.
 Get-ChildItem Variable: | ? {$_.Value -is [System.Int32]} | Measure-Object -Property Value -Sum | Select Sum
+#6.Вывести список из 6 процессов занимающих дольше всего процессор.
+Get-Process | Sort-Object -Descending CPU | Select -First 6
