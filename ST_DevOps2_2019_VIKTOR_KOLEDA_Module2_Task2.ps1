@@ -41,3 +41,8 @@ Get-ChildItem HKLM:\SOFTWARE\Microsoft\WindowsUpdate\ -Recurse | Export-Csv -Pat
 Get-History | Export-Clixml Task2:\history.xml
 #11.Загрузить данные из полученного в п.10 xml-файла и вывести в виде списка информацию о каждой записи, в виде 5 любых (выбранных Вами) свойств.
 Import-Clixml Task2:\history.xml | Format-List Id, CommandLine, StartExecutionTime, EndExecutionTime, ExecutionStatus
+#12.Удалить созданный диск и папку С:\M2T2_ФАМИЛИЯ
+#Удаляем созданный диск
+Remove-PSDrive Task2
+#Удаляем папке C:\M2T2_KOLEDA и созданные файлы
+Remove-Item C:\M2T2_KOLEDA\ -Recurse
