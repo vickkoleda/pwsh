@@ -20,3 +20,5 @@ Get-Service | ? {$_.Status -eq "Running"} > Task2:\RunningServices.txt
 Get-ChildItem Task2:\
 #Выводим в консоль содержимое файла RunningServices.txt
 Get-Content Task2:\RunningServices.txt
+#5.Просуммировать все числовые значения переменных текущего сеанса.
+Get-ChildItem Variable: | ? {$_.Value -is [System.Int32]} | Measure-Object -Property Value -Sum | Select Sum
