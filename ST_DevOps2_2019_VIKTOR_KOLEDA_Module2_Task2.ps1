@@ -33,3 +33,5 @@ Get-Process | foreach {
         {Write-host -f Red $_.Name"-"($_.VM/1MB)
     } 
 }
+#8.Подсчитать размер занимаемый файлами в папке C:\windows (и во всех подпапках) за исключением файлов *.tmp
+Get-ChildItem "C:\Windows" -Recurse -Force -ErrorAction SilentlyContinue -Exclude *.tmp | Measure-Object -Property Length -sum | select sum
