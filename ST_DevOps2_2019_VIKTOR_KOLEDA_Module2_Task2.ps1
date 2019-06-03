@@ -35,3 +35,5 @@ Get-Process | foreach {
 }
 #8.Подсчитать размер занимаемый файлами в папке C:\windows (и во всех подпапках) за исключением файлов *.tmp
 Get-ChildItem "C:\Windows" -Recurse -Force -ErrorAction SilentlyContinue -Exclude *.tmp | Measure-Object -Property Length -sum | select sum
+#9.Сохранить в CSV-файле информацию о записях одной ветви реестра HKLM:\SOFTWARE\Microsoft.
+Get-ChildItem HKLM:\SOFTWARE\Microsoft\WindowsUpdate\ -Recurse | Export-Csv -Path Task2:\regedit.csv -Delimiter ";"
