@@ -24,3 +24,12 @@ Get-Content Task2:\RunningServices.txt
 Get-ChildItem Variable: | ? {$_.Value -is [System.Int32]} | Measure-Object -Property Value -Sum | Select Sum
 #6.Вывести список из 6 процессов занимающих дольше всего процессор.
 Get-Process | Sort-Object -Descending CPU | Select -First 6
+#7.Вывести список названий и занятую виртуальную память (в Mb) каждого процесса, разделённые знаком тире, при этом если процесс занимает более 100Mb – выводить информацию красным цветом, иначе зелёным.
+Get-Process | foreach { 
+    if(($_.VM/1MB) -gt 100) 
+        {Write-host -f Green $_.Name"-"($_.VM/1MB)
+    } 
+    else 
+        {Write-host -f Red $_.Name"-"($_.VM/1MB)
+    } 
+}
