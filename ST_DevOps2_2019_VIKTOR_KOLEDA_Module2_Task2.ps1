@@ -38,4 +38,6 @@ Get-ChildItem "C:\Windows" -Recurse -Force -ErrorAction SilentlyContinue -Exclud
 #9.Сохранить в CSV-файле информацию о записях одной ветви реестра HKLM:\SOFTWARE\Microsoft.
 Get-ChildItem HKLM:\SOFTWARE\Microsoft\WindowsUpdate\ -Recurse | Export-Csv -Path Task2:\regedit.csv -Delimiter ";"
 #10.Сохранить в XML -файле историческую информацию о командах выполнявшихся в текущем сеансе работы PS
-Get-History | Export-Clixml Task2:\history.xml  
+Get-History | Export-Clixml Task2:\history.xml
+#11.Загрузить данные из полученного в п.10 xml-файла и вывести в виде списка информацию о каждой записи, в виде 5 любых (выбранных Вами) свойств.
+Import-Clixml Task2:\history.xml | Format-List Id, CommandLine, StartExecutionTime, EndExecutionTime, ExecutionStatus
