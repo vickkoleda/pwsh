@@ -13,3 +13,10 @@ Remove-Item -Path "D:\TestDir01"
 New-Item -Path "C:\" -Name "M2T2_KOLEDA" -ItemType "directory"
 #Создаём диск Task2
 New-PSDrive Task2 -PSProvider FileSystem -Root "C:\M2T2_KOLEDA"
+#4.Сохранить в текстовый файл на созданном диске список запущенных(!) служб. Просмотреть содержимое диска. Вывести содержимое файла в консоль PS.
+#Сохраняем список запущенных служб в файл RunningServices.txt
+Get-Service | ? {$_.Status -eq "Running"} > Task2:\RunningServices.txt
+#Просматриваем содержимое диска Task2
+Get-ChildItem Task2:\
+#Выводим в консоль содержимое файла RunningServices.txt
+Get-Content Task2:\RunningServices.txt
