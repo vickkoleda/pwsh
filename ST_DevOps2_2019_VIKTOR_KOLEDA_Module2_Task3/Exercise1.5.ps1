@@ -1,12 +1,12 @@
 #1.5.Создать один скрипт, объединив 3 задачи:
 Param (
-    [Parameter(HelpMessage="Enter CSV file Name. For Example SecurityUpdates")]
+    [Parameter(HelpMessage="Enter CSV file Name. Default is SecurityUpdates")]
     [AllowEmptyString()]
     [string]$CsvFile='SecurityUpdates',
-    [Parameter(HelpMessage="Enter XML file Name. For Example regeditWU")]
+    [Parameter(HelpMessage="Enter XML file Name. Default is regeditWU")]
     [AllowEmptyString()]
     [string]$XmlFile='RegeditWU',
-    [Parameter(HelpMessage="Enter full path to save CSV and XML files. For Example D:\")]
+    [Parameter(HelpMessage="Enter full path to save CSV and XML files. Default is D:\")]
     [AllowEmptyString()]
     [string]$TargetDir='D:\'
     )

@@ -1,6 +1,7 @@
 #1.4.Подсчитать размер занимаемый файлами в папке (например C:\windows) за исключением файлов с заданным расширением(напрмер .tmp)
 Param (
-    [Parameter(HelpMessage="Enter Target Dir. For Example C:\Windows")]
+    [Parameter(HelpMessage="Enter Target Dir. Default is C:\Windows")]
+    [AllowEmptyString()]
     [string]$TargetDir='C:\Windows',
     [Parameter(HelpMessage="Enter Files or File extensions which must be excluded from total size calculation. For Example *.tmp")]
     [AllowEmptyString()]
