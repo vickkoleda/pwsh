@@ -1,10 +1,21 @@
 #1.5.Создать один скрипт, объединив 3 задачи:
+Param (
+    [Parameter(HelpMessage="Enter CSV file Name. For Example SecurityUpdates")]
+    [AllowEmptyString()]
+    [string]$CsvFile='SecurityUpdates',
+    [Parameter(HelpMessage="Enter XML file Name. For Example regeditWU")]
+    [AllowEmptyString()]
+    [string]$XmlFile='RegeditWU',
+    [Parameter(HelpMessage="Enter full path to save CSV and XML files. For Example D:\")]
+    [AllowEmptyString()]
+    [string]$TargetDir='D:\'
+    )
 #1.5.1.Сохранить в CSV-файле информацию обо всех обновлениях безопасности ОС.
-Get-HotFix -Description "Security*" | Export-Csv -Path D:\SecurityUpdates.csv -Delimiter ";" -NoTypeInformation
+Get-HotFix -Description "Security*" | Export-Csv -Path $TargetDir$CsvFile.csv -Delimiter ";" -NoTypeInformation
 #1.5.2.Сохранить в XML-файле информацию о записях одной ветви реестра HKLM:\SOFTWARE\Microsoft.
-Get-ChildItem HKLM:\SOFTWARE\Microsoft\WindowsUpdate\ -Recurse | Export-Clixml D:\regeditWU.xml
+Get-ChildItem HKLM:\SOFTWARE\Microsoft\WindowsUpdate\ -Recurse | Export-Clixml $TargetDir$XmlFile.xml
 #1.5.3.Загрузить данные из полученного в п.1.5.1 или п.1.5.2 файла и вывести в виде списка  разным разными цветами
-Import-Csv D:\SecurityUpdates.csv -Delimiter ";" | 
+Import-Csv $TargetDir$CsvFile.csv -Delimiter ";" | 
     foreach {
                 Write-Host -ForegroundColor Green "PSComputerName = "$_.PSComputerName
                 Write-Host -ForegroundColor Green "UpdateClass = "$_.Description
@@ -15,7 +26,7 @@ Import-Csv D:\SecurityUpdates.csv -Delimiter ";" |
                 Write-Host -ForegroundColor Green "Caption = "$_.Caption
                 Write-Host "----------"
             }   
-Import-Clixml D:\regedit.xml | 
+Import-Clixml $TargetDir$XmlFile.xml | 
     foreach {
                 Write-Host -ForegroundColor Blue "Name = "$_.Name
                 Write-Host -ForegroundColor Blue "Property = "$_.Property
