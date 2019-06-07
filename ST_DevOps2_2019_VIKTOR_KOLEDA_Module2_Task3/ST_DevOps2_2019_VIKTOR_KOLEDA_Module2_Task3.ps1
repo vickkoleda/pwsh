@@ -111,3 +111,7 @@ echo "`$e=2.718" >> c:\Users\vkaliada\Documents\WindowsPowerShell\Microsoft.Powe
 echo "Set-Location D:" >> c:\Users\vkaliada\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 #2.6.Вывести приветсвие
 echo 'Write-Host "Are you ready to script?"' >> c:\Users\vkaliada\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+
+#.\Exercise3.ps1
+#3.Получить список всех доступных модулей
+Get-Module -ListAvailable
