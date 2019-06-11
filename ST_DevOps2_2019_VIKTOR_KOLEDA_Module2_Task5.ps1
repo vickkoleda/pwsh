@@ -18,3 +18,15 @@ Restart-Service winrm
 netsh advfirewall firewall add rule name="Win rm port 42658" dir=in action=allow protocol=TCP localport=42658
 Restart-Service winrm
 #5.Создать конфигурацию сессии с целью ограничения использования всех команд, кроме просмотра содержимого дисков.
+#Создаем в домене группу HelpDesk и пользователя HelpUser, входящего в данную группу
+#Cоздаем новый файл конфигурации сессии ADUser.pssc
+New-PSSessionConfigurationFile -Path ADUser.pssc -AliasDefinitions @{Name="dir";Value="Get-ChildItem";Description="Gets the files and folders.";Options="ReadOnly"} `
+ -VisibleAliases "dir" -VisibleCmdlets Get-ChildItem, Get-Help, Exit-PSSession, Get-Command, Get-FormatData, Measure-Object, Out-Default, Select-Object -VisibleProviders "FileSystem"
+#Сохраняем учетные данные администратора домена
+$cred = Get-Credential test\vkoleda
+#Регистриуем новый файл конфигурации и даем права на подключение пользователям группы HelpDesk
+Register-PSSessionConfiguration -Name ADUser -Path  .\ADUser.pssc -RunAsCredential $cred -ShowSecurityDescriptorUI
+#Перезапускаем службу Win RM
+Restart-Service winrm
+#Проверяем подключение к виртуальной машине KOLEDA_VM3, используя учетные данные пользователя HelpUser
+Enter-PSSession -ComputerName 192.168.10.50 -Credential test\helpuser -ConfigurationName ADUser -Port 42658
