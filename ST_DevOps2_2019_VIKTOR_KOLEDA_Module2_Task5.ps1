@@ -16,7 +16,6 @@ winrm set winrm/config/client ‘@{TrustedHosts="*"}’
 Set-Item WSMan:\localhost\listener\*\Port 42658
 Restart-Service winrm
 netsh advfirewall firewall add rule name="Win rm port 42658" dir=in action=allow protocol=TCP localport=42658
-Restart-Service winrm
 #5.Создать конфигурацию сессии с целью ограничения использования всех команд, кроме просмотра содержимого дисков.
 #Создаем в домене группу HelpDesk и пользователя HelpUser, входящего в данную группу
 #Cоздаем новый файл конфигурации сессии ADUser.pssc
