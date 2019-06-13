@@ -33,7 +33,8 @@ New-Item e:\sharedfolder -Type dir
 Where-Object -Filter {$_.Name -eq "win32_Share"}).InvokeMethod("Create",("e:\sharedfolder","TestShare",0,15,"Test Share"))
 #1.5.Удалить шару из п.1.4
 (Get-WmiObject win32_share -ComputerName . | Where-Object {$_.name -eq "TestShare"}).InvokeMethod("Delete",$null)
-#1.6.Скрипт входными параметрами которого являются Маска подсети и два ip-адреса. Результат  – сообщение (ответ) в одной ли подсети эти адреса.
+#1.6.Скрипт входными параметрами которого являются Маска подсети и два ip-адреса. 
+#Результат  – сообщение (ответ) в одной ли подсети эти адреса.
 param(
     [Parameter(Mandatory=$true, HelpMessage="Enter netmask in CIDR notation. For example 24")]
     [ValidateRange(0,32)]
