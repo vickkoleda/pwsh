@@ -46,15 +46,15 @@ param(
 )
 
 [uint32] $mask = ((-bnot [uint32]0) -shl (32 - $CIDR))
-[uint32] $IP1 = NetworkToBinary $IPaddress1
-[uint32] $IP2 = NetworkToBinary $IPaddress2
+[uint32] $IP1 = AddressToBinary $IPaddress1
+[uint32] $IP2 = AddressToBinary $IPaddress2
 if (($IP1 -band $mask) -eq ($IP2 -band $mask)) {
     Write-Output "These IP addresses in the same subnet"}
 else {
     Write-Output "These IP addresses in the different subnet"
 }
 
-function NetworkToBinary ($IPaddress)
+function AddressToBinary ($IPaddress)
 {
     $a = [uint32[]]$IPaddress.split('.')
     return ($a[0] -shl 24) + ($a[1] -shl 16) + ($a[2] -shl 8) + $a[3]
