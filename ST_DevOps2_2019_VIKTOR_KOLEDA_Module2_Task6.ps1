@@ -25,7 +25,46 @@ ForEach ($a in $VMs) {
 }
 #1.4.Расшарить папку на компьютере
 New-Item e:\sharedfolder -Type dir
-net share testshare=e:\sharedfolder /users:15 /remark:"test share"
+(Get-WmiObject -List -ComputerName . | Where-Object -Filter {$_.Name -eq "win32_Share"}).InvokeMethod("Create",("e:\sharedfolder","TestShare",0,15,"Test Share"))
 #1.5.Удалить шару из п.1.4
-net share testshare /delete
+(Get-WmiObject win32_share -ComputerName . | Where-Object {$_.name -eq "TestShare"}).InvokeMethod("Delete",$null)
 #1.6.Скрипт входными параметрами которого являются Маска подсети и два ip-адреса. Результат  – сообщение (ответ) в одной ли подсети эти адреса.
+param(
+    [Parameter(
+        Mandatory=$true,
+        HelpMessage="Enter netmask in CIDR notation. For example 24")]
+    [ValidateRange(0,32)]
+    [Int32]$CIDR,
+    
+    [Parameter(
+        Mandatory=$true,
+        HelpMessage="Enter first IP adress")]
+    [ValidateScript({$_ -match [IPAddress]$_ })]
+    [string]
+    $IPaddress1,
+
+    [Parameter(
+        Mandatory=$true,
+        HelpMessage="Enter first IP adress")]
+    [ValidateScript({$_ -match [IPAddress]$_ })]
+    [string]
+    $IPaddress2
+)
+
+[uint32] $mask = ((-bnot [uint32]0) -shl (32 - $CIDR))
+
+function NetworkToBinary ($IPaddress)
+{
+    $a = [uint32[]]$IPaddress.split('.')
+    return ($a[0] -shl 24) + ($a[1] -shl 16) + ($a[2] -shl 8) + $a[3]
+}
+
+[uint32] $IP1 = NetworkToBinary $IPaddress1
+
+[uint32] $IP2 = NetworkToBinary $IPaddress2
+
+if (($IP1 -band $mask) -eq ($IP2 -band $mask)) {
+    Write-Output "These IP addresses in the same subnet"}
+else {
+    Write-Output "These IP addresses in the different subnet"
+}
