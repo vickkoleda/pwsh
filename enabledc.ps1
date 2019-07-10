@@ -1,9 +1,9 @@
-$pslogin = "koleda_vm4\administrator"
+$pslogin = "koleda_vm2\administrator"
 $password='Qwerty1!'
 $pass = ConvertTo-SecureString -AsPlainText $password -Force
 $Creds = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $pslogin,$pass
 $options = New-PSSessionOption -SkipCACheck
-$s = New-PSSession -ComputerName koleda_vm4 -Credential $Creds -Port 5986 -SessionOption $options -UseSSL
+$s = New-PSSession -ComputerName koleda_vm2 -Credential $Creds -Port 5986 -SessionOption $options -UseSSL
 Invoke-Command -Session $s -ScriptBlock {Install-WindowsFeature AD-Domain-Services -IncludeManagementTools}
 Invoke-Command -Session $s -ScriptBlock {  
     Import-Module ADDSDeployment
@@ -18,6 +18,6 @@ Invoke-Command -Session $s -ScriptBlock {
     -LogPath "C:\Windows\NTDS" `
     -NoRebootOnCompletion:$false `
     -SysvolPath "C:\Windows\SYSVOL" `
-    -SafeModeAdministratorPassword (Convertto-SecureString -AsPlainText "Qwerty1!" -Force) `
+    -SafeModeAdministratorPassword (ConvertTo-SecureString -AsPlainText "Qwerty1!" -Force) `
     -Force:$true
     }
